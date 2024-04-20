@@ -75,7 +75,7 @@
     </header>
     <nav>
         <a href="#">Home</a>
-        <a href="#">Cart</a>
+        <a href="#" id="cart-link">Cart <span id="cart-count">(0)</span></a>
         <a href="#">Contact</a>
     </nav>
     <div class="container">
@@ -83,23 +83,46 @@
             <h2>Dark Chocolate Bar</h2>
             <img src="dark_chocolate.jpg" alt="Dark Chocolate Bar">
             <p>$5.99</p>
-            <button class="btn">Add to Cart</button>
+            <button class="btn add-to-cart" data-name="Dark Chocolate Bar" data-price="5.99">Add to Cart</button>
         </div>
         <div class="chocolate">
             <h2>Milk Chocolate Truffles</h2>
             <img src="milk_chocolate.jpg" alt="Milk Chocolate Truffles">
             <p>$8.99</p>
-            <button class="btn">Add to Cart</button>
+            <button class="btn add-to-cart" data-name="Milk Chocolate Truffles" data-price="8.99">Add to Cart</button>
         </div>
         <div class="chocolate">
             <h2>White Chocolate Bark</h2>
             <img src="white_chocolate.jpg" alt="White Chocolate Bark">
             <p>$7.49</p>
-            <button class="btn">Add to Cart</button>
+            <button class="btn add-to-cart" data-name="White Chocolate Bark" data-price="7.49">Add to Cart</button>
         </div>
     </div>
     <footer>
         &copy; 2024 Choco Delights. All rights reserved.
     </footer>
+
+    <script>
+        // JavaScript Code
+        const cartLink = document.getElementById('cart-link');
+        const cartCount = document.getElementById('cart-count');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        let cartItems = [];
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.dataset.name;
+                const price = parseFloat(button.dataset.price);
+
+                cartItems.push({ name, price });
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            const totalItems = cartItems.length;
+            cartCount.textContent = `(${totalItems})`;
+        }
+    </script>
 </body>
 </html>
